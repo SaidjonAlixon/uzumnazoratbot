@@ -6,7 +6,7 @@ pyTelegramBotAPI==4.14.0
 
 # HTTP so'rovlar
 requests==2.31.0
-urllib3==0.7.0
+urllib3==2.0.7
 
 # Logging va vaqt
 python-dateutil==2.8.2
