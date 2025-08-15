@@ -35,41 +35,61 @@ def test():
 def start_bot():
     """Botni ishga tushirish uchun endpoint"""
     try:
-        # Avval oddiy test
         logger.info("Start-bot endpoint chaqirildi")
         
-        # Ma'lumotlar bazasini ishga tushirish
-        from database import init_database
-        init_database()
-        logger.info("Ma'lumotlar bazasi muvaffaqiyatli ishga tushirildi")
+        # Avval oddiy test - kutubxonalar ishlayotganini tekshirish
+        try:
+            from config import BOT_TOKEN
+            logger.info("Config import muvaffaqiyatli")
+        except Exception as e:
+            logger.error(f"Config import xatosi: {e}")
+            return jsonify({"status": "error", "message": f"Config xatosi: {str(e)}"}), 500
         
-        # Bot obyektini yaratish
-        from config import BOT_TOKEN
-        from telebot import TeleBot
-        from telebot.types import BotCommand
+        try:
+            from telebot import TeleBot
+            from telebot.types import BotCommand
+            logger.info("Telebot import muvaffaqiyatli")
+        except Exception as e:
+            logger.error(f"Telebot import xatosi: {e}")
+            return jsonify({"status": "error", "message": f"Telebot xatosi: {str(e)}"}), 500
         
-        bot = TeleBot(BOT_TOKEN)
-        logger.info("Bot muvaffaqiyatli yaratildi")
+        try:
+            from database import init_database
+            init_database()
+            logger.info("Ma'lumotlar bazasi muvaffaqiyatli ishga tushirildi")
+        except Exception as e:
+            logger.error(f"Database xatosi: {e}")
+            return jsonify({"status": "error", "message": f"Database xatosi: {str(e)}"}), 500
         
-        # Bot buyruqlarini o'rnatish
-        commands = [
-            BotCommand("start", "Botni ishga tushirish"),
-            BotCommand("help", "Yordam"),
-            BotCommand("api", "API kalitini boshqarish"),
-            BotCommand("menu", "Asosiy menyu"),
-            BotCommand("status", "API holati")
-        ]
-        bot.set_my_commands(commands)
-        
-        # Handlerlarni ro'yxatdan o'tkazish
-        from bot_handlers import register_handlers
-        register_handlers(bot)
-        logger.info("Barcha handlerlar ro'yxatdan o'tkazildi")
-        
-        # Admin panelni yaratish
-        from admin_panel import create_admin_panel
-        admin_panel = create_admin_panel(bot)
-        logger.info("Admin panel muvaffaqiyatli yaratildi")
+        try:
+            from bot_handlers import register_handlers
+            from admin_panel import create_admin_panel
+            
+            # Bot obyektini yaratish
+            bot = TeleBot(BOT_TOKEN)
+            logger.info("Bot muvaffaqiyatli yaratildi")
+            
+            # Bot buyruqlarini o'rnatish
+            commands = [
+                BotCommand("start", "Botni ishga tushirish"),
+                BotCommand("help", "Yordam"),
+                BotCommand("api", "API kalitini boshqarish"),
+                BotCommand("menu", "Asosiy menyu"),
+                BotCommand("status", "API holati")
+            ]
+            bot.set_my_commands(commands)
+            
+            # Handlerlarni ro'yxatdan o'tkazish
+            register_handlers(bot)
+            logger.info("Barcha handlerlar ro'yxatdan o'tkazildi")
+            
+            # Admin panelni yaratish
+            admin_panel = create_admin_panel(bot)
+            logger.info("Admin panel muvaffaqiyatli yaratildi")
+            
+        except Exception as e:
+            logger.error(f"Bot yaratish xatosi: {e}")
+            return jsonify({"status": "error", "message": f"Bot yaratish xatosi: {str(e)}"}), 500
         
         # Botni ishga tushirish
         logger.info("Bot ishga tushmoqda...")
@@ -88,8 +108,8 @@ def start_bot():
         return jsonify({"status": "success", "message": "Bot muvaffaqiyatli ishga tushirildi"})
         
     except Exception as e:
-        logger.error(f"Botni ishga tushirishda xatolik: {e}")
-        return jsonify({"status": "error", "message": str(e)}), 500
+        logger.error(f"Umumiy xatolik: {e}")
+        return jsonify({"status": "error", "message": f"Umumiy xatolik: {str(e)}"}), 500
 
 if __name__ == "__main__":
     # Lokal da ishga tushirish uchun
