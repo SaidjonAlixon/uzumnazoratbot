@@ -1,6 +1,5 @@
 # Telegram Bot kutubxonalari
 pyTelegramBotAPI==4.14.0
-telebot==0.0.5
 
 # Ma'lumotlar bazasi
 # sqlite3 - Python built-in kutubxona, alohida o'rnatish shart emas

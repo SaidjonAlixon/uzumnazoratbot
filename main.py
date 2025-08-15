@@ -48,10 +48,10 @@ def start_bot():
         try:
             from telebot import TeleBot
             from telebot.types import BotCommand
-            logger.info("Telebot import muvaffaqiyatli")
+            logger.info("pyTelegramBotAPI import muvaffaqiyatli")
         except Exception as e:
-            logger.error(f"Telebot import xatosi: {e}")
-            return jsonify({"status": "error", "message": f"Telebot xatosi: {str(e)}"}), 500
+            logger.error(f"pyTelegramBotAPI import xatosi: {e}")
+            return jsonify({"status": "error", "message": f"pyTelegramBotAPI xatosi: {str(e)}"}), 500
         
         try:
             from database import init_database
