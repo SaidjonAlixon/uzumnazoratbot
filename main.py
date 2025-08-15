@@ -7,12 +7,6 @@ O'zbekiston bozori sotuvchilari uchun Telegram bot
 import os
 import logging
 from flask import Flask, jsonify
-from telebot import TeleBot
-from telebot.types import BotCommand
-from config import BOT_TOKEN
-from bot_handlers import register_handlers
-from database import init_database
-from admin_panel import create_admin_panel
 
 # Logging sozlamalari
 logging.basicConfig(
@@ -30,12 +24,20 @@ def home():
 
 @app.route('/health')
 def health():
-    return jsonify({"status": "healthy", "bot": "running"})
+    return jsonify({"status": "healthy", "bot": "ready"})
 
 @app.route('/start-bot')
 def start_bot():
     """Botni ishga tushirish uchun endpoint"""
     try:
+        # Avval asosiy kutubxonalarni import qilish
+        from config import BOT_TOKEN
+        from bot_handlers import register_handlers
+        from database import init_database
+        from admin_panel import create_admin_panel
+        from telebot import TeleBot
+        from telebot.types import BotCommand
+        
         # Ma'lumotlar bazasini ishga tushirish
         init_database()
         logger.info("Ma'lumotlar bazasi muvaffaqiyatli ishga tushirildi")
@@ -68,7 +70,10 @@ def start_bot():
         # Botni background da ishga tushirish
         import threading
         def run_bot():
-            bot.infinity_polling(timeout=10, long_polling_timeout=5)
+            try:
+                bot.infinity_polling(timeout=10, long_polling_timeout=5)
+            except Exception as e:
+                logger.error(f"Bot polling da xatolik: {e}")
         
         bot_thread = threading.Thread(target=run_bot, daemon=True)
         bot_thread.start()
