@@ -26,23 +26,28 @@ def home():
 def health():
     return jsonify({"status": "healthy", "bot": "ready"})
 
+@app.route('/test')
+def test():
+    """Oddiy test endpoint"""
+    return jsonify({"status": "success", "message": "Test endpoint is working!"})
+
 @app.route('/start-bot')
 def start_bot():
     """Botni ishga tushirish uchun endpoint"""
     try:
-        # Avval asosiy kutubxonalarni import qilish
-        from config import BOT_TOKEN
-        from bot_handlers import register_handlers
-        from database import init_database
-        from admin_panel import create_admin_panel
-        from telebot import TeleBot
-        from telebot.types import BotCommand
+        # Avval oddiy test
+        logger.info("Start-bot endpoint chaqirildi")
         
         # Ma'lumotlar bazasini ishga tushirish
+        from database import init_database
         init_database()
         logger.info("Ma'lumotlar bazasi muvaffaqiyatli ishga tushirildi")
         
         # Bot obyektini yaratish
+        from config import BOT_TOKEN
+        from telebot import TeleBot
+        from telebot.types import BotCommand
+        
         bot = TeleBot(BOT_TOKEN)
         logger.info("Bot muvaffaqiyatli yaratildi")
         
@@ -57,10 +62,12 @@ def start_bot():
         bot.set_my_commands(commands)
         
         # Handlerlarni ro'yxatdan o'tkazish
+        from bot_handlers import register_handlers
         register_handlers(bot)
         logger.info("Barcha handlerlar ro'yxatdan o'tkazildi")
         
         # Admin panelni yaratish
+        from admin_panel import create_admin_panel
         admin_panel = create_admin_panel(bot)
         logger.info("Admin panel muvaffaqiyatli yaratildi")
         

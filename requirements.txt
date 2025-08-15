@@ -7,7 +7,7 @@ telebot==0.0.5
 
 # HTTP so'rovlar
 requests==2.31.0
-urllib3==2.0.7
+urllib3==0.7.0
 
 # Logging va vaqt
 python-dateutil==2.8.2
@@ -16,7 +16,10 @@ python-dateutil==2.8.2
 python-dotenv==1.0.0
 
 # Web framework (Railway uchun)
-Flask==3.0.0
+Flask==2.3.3
 
 # Railway uchun qo'shimcha
 gunicorn==21.2.0
+
+# Qo'shimcha kutubxonalar
+Werkzeug==2.3.7
