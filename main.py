@@ -32,8 +32,9 @@ def home():
 def health():
     return jsonify({"status": "healthy", "bot": "running"})
 
-def main():
-    """Bot dasturini ishga tushirish"""
+@app.route('/start-bot')
+def start_bot():
+    """Botni ishga tushirish uchun endpoint"""
     try:
         # Ma'lumotlar bazasini ishga tushirish
         init_database()
@@ -64,21 +65,21 @@ def main():
         # Botni ishga tushirish
         logger.info("Bot ishga tushmoqda...")
         
-        # Railway da ishga tushirish uchun
-        if os.getenv('RAILWAY_ENVIRONMENT'):
-            # Railway da web server bilan ishga tushirish
-            port = int(os.getenv('PORT', 8000))
-            app.run(host='0.0.0.0', port=port, debug=False)
-        else:
-            # Lokal da bot polling bilan ishga tushirish
+        # Botni background da ishga tushirish
+        import threading
+        def run_bot():
             bot.infinity_polling(timeout=10, long_polling_timeout=5)
+        
+        bot_thread = threading.Thread(target=run_bot, daemon=True)
+        bot_thread.start()
+        
+        return jsonify({"status": "success", "message": "Bot muvaffaqiyatli ishga tushirildi"})
         
     except Exception as e:
         logger.error(f"Botni ishga tushirishda xatolik: {e}")
-        raise
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == "__main__":
-    main()
-
-# Railway uchun Flask app ni export qilish
-# Bu app Railway da ishlatiladi
+    # Lokal da ishga tushirish uchun
+    port = int(os.getenv('PORT', 8000))
+    app.run(host='0.0.0.0', port=port, debug=False)
