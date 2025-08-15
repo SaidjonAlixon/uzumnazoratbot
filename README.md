@@ -8,7 +8,7 @@ UZUM Market sotuvchilari uchun Telegram bot. Bu bot orqali siz o'zingizning bizn
 
 ### 2. Railway da ishga tushirish
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/yourusername/MarketBot)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/new?template=https://github.com/SaidjonAlixon/uzumnazoratbot)
 
 ### 3. Environment Variables ni sozlash
 
