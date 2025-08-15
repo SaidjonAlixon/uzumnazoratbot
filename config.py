@@ -34,7 +34,7 @@ BOT_CONFIG = {
 ADMIN_CONFIG = {
     "default_admin_id": int(os.getenv("DEFAULT_ADMIN_ID", "7517807386")),  # Environment dan o'qish
     "support_group": os.getenv("SUPPORT_GROUP", "https://t.me/unb_uz"),
-    "admin_username": os.getenv("ADMIN_USERNAME", "https://t.me/Tolov_admini_btu"),  # Environment dan o'qish
+    "admin_username": os.getenv("ADMIN_USERNAME", "Tolov_admini_btu"),  # Environment dan o'qish
     "admin_permissions": ["ALL"]  # Barcha huquqlar
 }
 
