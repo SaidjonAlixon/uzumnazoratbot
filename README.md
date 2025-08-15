@@ -1,0 +1,2 @@
+# uzumnazoratbot
+uzm uchun bussines
