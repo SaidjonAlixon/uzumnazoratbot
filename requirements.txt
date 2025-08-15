@@ -1,0 +1,22 @@
+# Telegram Bot kutubxonalari
+pyTelegramBotAPI==4.14.0
+telebot==0.0.5
+
+# Ma'lumotlar bazasi
+# sqlite3 - Python built-in kutubxona, alohida o'rnatish shart emas
+
+# HTTP so'rovlar
+requests==2.31.0
+urllib3==2.0.7
+
+# Logging va vaqt
+python-dateutil==2.8.2
+
+# Environment variables
+python-dotenv==1.0.0
+
+# Web framework (Railway uchun)
+Flask==3.0.0
+
+# Railway uchun qo'shimcha
+gunicorn==21.2.0
