@@ -66,7 +66,7 @@ def format_order_status_v2(status: str) -> str:
 def format_product_info(product: Dict) -> str:
     """Mahsulot ma'lumotlarini formatlash"""
     try:
-        name = product.get('name', 'Noma\'lum mahsulot')
+        name = product.get('name', 'Noma''lum mahsulot')
         sku = product.get('sku', 'N/A')
         price = product.get('price', 0)
         stock = product.get('stock', 0)
@@ -87,7 +87,7 @@ def format_order_info(order: Dict) -> str:
         status = order.get('status', 'unknown')
         total = order.get('total', 0)
         date = order.get('created_at', '')
-        customer = order.get('customer_name', 'Noma\'lum')
+        customer = order.get('customer_name', 'Noma''lum')
         
         text = f"🛒 <b>Buyurtma #{order_id}</b>\n"
         text += f"👤 Mijoz: {customer}\n"
@@ -153,7 +153,7 @@ def format_finance_expenses_v2(payments: List[Dict]) -> str:
         
         for i, payment in enumerate(payments, 1):
             payment_id = payment.get('id', 'N/A')
-            name = payment.get('name', 'Noma\'lum')
+            name = payment.get('name', 'Noma''lum')
             amount = payment.get('paymentPrice', 0)
             status = payment.get('status', 'unknown')
             date_created = payment.get('dateCreated', '')
@@ -173,7 +173,7 @@ def format_finance_expenses_v2(payments: List[Dict]) -> str:
 def format_shop_info(shop: Dict) -> str:
     """Do'kon ma'lumotlarini formatlash"""
     try:
-        name = shop.get('name', 'Noma\'lum do\'kon')
+        name = shop.get('name', 'Noma''lum do''kon')
         shop_id = shop.get('id', 'N/A')
         status = shop.get('status', 'unknown')
         
@@ -314,7 +314,7 @@ def format_finance_orders_v2(order_items: List[Dict]) -> str:
         
         for i, order in enumerate(order_items, 1):
             order_id = order.get('orderId', 'N/A')
-            sku_title = order.get('skuTitle', 'Noma\'lum')
+            sku_title = order.get('skuTitle', 'Noma''lum')
             amount = order.get('amount', 0)
             seller_price = order.get('sellerPrice', 0)
             commission = order.get('commission', 0)

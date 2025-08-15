@@ -667,7 +667,7 @@ Savollaringiz bo'lsa, "👥 Qo'llab quvvatlash guruhi" tugmasini bosing!"""
                 text = f"🔍 <b>Qidiruv natijalari: '{search_query}'</b>\n\n"
                 
                 for i, product in enumerate(products, 1):
-                    name = product.get('title', 'Noma\'lum mahsulot')
+                    name = product.get('title', 'Noma''lum mahsulot')
                     sku_title = product.get('skuTitle', 'N/A')
                     price = product.get('price', 0)
                     quantity_active = product.get('quantityActive', 0)
@@ -1469,7 +1469,7 @@ def handle_invoices_callback(call: CallbackQuery, api_key: str):
                 invoice_number = invoice.get('invoiceNumber', 'N/A')
                 full_price = invoice.get('fullPrice', 0)
                 date_created = invoice.get('dateCreated', '')
-                shop_title = invoice.get('shopTitle', 'Noma\'lum do\'kon')
+                shop_title = invoice.get('shopTitle', 'Noma''lum do''kon')
                 
                 text += f"{i}. <b>Faktura #{invoice_number}</b>\n"
                 text += f"   🆔 ID: {invoice_id}\n"
@@ -1957,7 +1957,7 @@ def handle_fbs_shop_statistics_callback(call: CallbackQuery, api_key: str):
             
             for i, shop in enumerate(shops[:5], 1):
                 shop_id = shop.get('id', 'N/A')
-                shop_name = shop.get('name', 'Noma\'lum do\'kon')
+                shop_name = shop.get('name', 'Noma''lum do''kon')
                 
                 # Har bir do'kon uchun buyurtmalar sonini olamiz
                 orders_count = api_client.get_fbs_orders_count(
@@ -2172,7 +2172,7 @@ def handle_fbs_missing_items_callback(call: CallbackQuery, api_key: str):
         # Har bir do'kon uchun yo'qolgan tovarlarni qidiramiz
         for i, shop in enumerate(shops[:3], 1):  # Faqat birinchi 3 ta do'kon
             shop_id = shop.get('id')
-            shop_name = shop.get('name', 'Noma\'lum do\'kon')
+            shop_name = shop.get('name', 'Noma''lum do''kon')
             
             if not shop_id:
                 continue
@@ -2271,7 +2271,7 @@ def handle_fbs_missing_statistics_callback(call: CallbackQuery, api_key: str):
         # Har bir do'kon uchun statistika
         for shop in shops:
             shop_id = shop.get('id')
-            shop_name = shop.get('name', 'Noma\'lum do\'kon')
+            shop_name = shop.get('name', 'Noma''lum do''kon')
             
             if not shop_id:
                 continue

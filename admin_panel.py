@@ -467,7 +467,7 @@ class AdminPanel:
                 
                 text += f"{i}. {status} {api_status} <b>{username}</b>\n"
                 text += f"   ID: {user['user_id']}\n"
-                text += f"   Sana: {user['registration_date'][:10] if user['registration_date'] else 'Noma\'lum'}\n\n"
+                text += f"   Sana: {user['registration_date'][:10] if user['registration_date'] else 'Noma''lum'}\n\n"
             
             if len(users) > 10:
                 text += f"📋 Jami {len(users)} ta foydalanuvchi\n"
@@ -681,7 +681,7 @@ class AdminPanel:
                     text += f"{i}. <b>{username}</b>\n"
                     text += f"   ID: {user_id}\n"
                     text += f"   API: <code>{api_key}</code>\n"
-                    text += f"   Sana: {created_at[:10] if created_at else 'Noma\'lum'}\n\n"
+                    text += f"   Sana: {created_at[:10] if created_at else 'Noma''lum'}\n\n"
             else:
                 text += "📭 API kalitlari topilmadi"
             
@@ -728,7 +728,7 @@ class AdminPanel:
                     full_name = user['full_name'] or "Noma'lum"
                     api_key = user['api_key']
                     status = "❌" if user['is_blocked'] else "✅"
-                    date = user['registration_date'][:10] if user['registration_date'] else 'Noma\'lum'
+                    date = user['registration_date'][:10] if user['registration_date'] else 'Noma''lum'
                     
                     text += f"{i}. {status} <b>{username}</b>\n"
                     text += f"   👤 Ism: {full_name}\n"
