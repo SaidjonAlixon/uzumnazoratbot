@@ -123,10 +123,26 @@ def register_handlers(telegram_bot: TeleBot):
     @bot.message_handler(commands=['api'])
     def handle_api_command(message: Message):
         """API buyrug'ini bajarish"""
+        try:
+            # Avval rasmni yuborish
+            with open('uzum_kirish.png', 'rb') as photo:
+                bot.send_photo(
+                    message.chat.id,
+                    photo,
+                    caption="🔑 API kalitingizni yuboring:\n\nAPI kalitni olish yuqoridagi rasmda ketma ket ko'rsatilgan shunday holatda yuboring iltimos e'tiborli bo'ling!"
+                )
+        except FileNotFoundError:
+            # Agar rasm topilmasa, oddiy xabar yuborish
+            bot.send_message(
+                message.chat.id,
+                MESSAGES["api_prompt"],
+                parse_mode="HTML"
+            )
+        
+        # API boshqarish klaviaturasini yuborish
         bot.send_message(
             message.chat.id,
-            MESSAGES["api_prompt"],
-            parse_mode="HTML",
+            "Kerakli amalni tanlang:",
             reply_markup=get_api_management_keyboard()
         )
     
@@ -917,21 +933,41 @@ Savollaringiz bo'lsa, "👥 Qo'llab quvvatlash guruhi" tugmasini bosing!"""
             
             elif data == "add_api":
                 user_states[user_id] = "waiting_api_key"
-                bot.edit_message_text(
-                    MESSAGES["api_prompt"],
-                    call.message.chat.id,
-                    call.message.message_id,
-                    parse_mode="HTML"
-                )
+                try:
+                    # Avval rasmni yuborish
+                    with open('uzum_kirish.png', 'rb') as photo:
+                        bot.send_photo(
+                            call.message.chat.id,
+                            photo,
+                            caption="🔑 API kalitingizni yuboring:\n\nAPI kalitni olish yuqoridagi rasmda ketma ket ko'rsatilgan shunday holatda yuboring iltimos e'tiborli bo'ling!"
+                        )
+                except FileNotFoundError:
+                    # Agar rasm topilmasa, oddiy xabar yuborish
+                    bot.edit_message_text(
+                        MESSAGES["api_prompt"],
+                        call.message.chat.id,
+                        call.message.message_id,
+                        parse_mode="HTML"
+                    )
             
             elif data == "change_api":
                 user_states[user_id] = "waiting_api_key"
-                bot.edit_message_text(
-                    "🔄 <b>Yangi API kalitni kiriting:</b>",
-                    call.message.chat.id,
-                    call.message.message_id,
-                    parse_mode="HTML"
-                )
+                try:
+                    # Avval rasmni yuborish
+                    with open('uzum_kirish.png', 'rb') as photo:
+                        bot.send_photo(
+                            call.message.chat.id,
+                            photo,
+                            caption="🔄 API kalitingizni yuboring:\n\nAPI kalitni olish yuqoridagi rasmda ketma ket ko'rsatilgan shunday holatda yuboring iltimos e'tiborli bo'ling!"
+                        )
+                except FileNotFoundError:
+                    # Agar rasm topilmasa, oddiy xabar yuborish
+                    bot.edit_message_text(
+                        "🔄 <b>Yangi API kalitni kiriting:</b>",
+                        call.message.chat.id,
+                        call.message.message_id,
+                        parse_mode="HTML"
+                    )
             
             elif data == "delete_api":
                 bot.edit_message_text(

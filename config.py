@@ -62,7 +62,7 @@ Boshlash uchun 🔄 API kiritish ✅ tugmasini bosing!""",
 
 <i>API kalitingizni kiritganingizdan so'ng barcha imkoniyatlardan foydalanishingiz mumkin.</i>""",
     
-    "api_prompt": "🔑 <b>API kalitingizni yuboring:</b>\n\n<i>API kalit sizning shaxsiy ma'lumotlaringizdir. Uni hech kimga bermang!</i>",
+    "api_prompt": "🔑 API kalitingizni yuboring:\n\nAPI kalitni olish yuqoridagi rasmda ketma ket ko'rsatilgan shunday holatda yuboring iltimos e'tiborli bo'ling!",
     
     "api_saved": "✅ <b>API kalit muvaffaqiyatli saqlandi!</b>\n\nEndi barcha imkoniyatlardan foydalanishingiz mumkin.",
     
